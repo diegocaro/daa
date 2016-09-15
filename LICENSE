@@ -1,0 +1,11 @@
+--2016-09-14 20:11:48--  https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt
+Resolving creativecommons.org... 104.20.77.18, 104.20.78.18, 2400:cb00:2048:1::6814:4d12, ...
+Connecting to creativecommons.org|104.20.77.18|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/plain]
+Saving to: 'legalcode.txt'
+
+     0K .......... ..........                                   141K=0.1s
+
+2016-09-14 20:11:49 (141 KB/s) - 'legalcode.txt' saved [20845]
+
