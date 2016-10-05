@@ -1,30 +1,15 @@
-class Node:
-    def __init__(self, symbol, freq):
-        self.symbol = symbol
-        self.freq = freq
-        self.right = None
-        self.left = None
+from Heap import *
 
-class Heap:
-    def __init__(self):
-        self.root = [None]
+def Huffman_Compression(nodes):
+    pass
 
-    def _parent(self, i):
-        return i//2
+def Huffman_transform(data):
+    pass
 
-    def _left_child(self, i):
-        return 2*i
+def Huffman(array):
+    """Toma un sets de datos y los comprime usando el algoritmo de Huffman
 
-    def _right_child(self, i):
-        return 2*i + 1
-
-    def push(self, Node):
-        self.root.append(Node)
-        pass
-        #TODO: PUSH, POP Y HUFFMAN
-
-    def pop(self):
-        pass
-
-def Huffman(input):
+    *array*, es pasado a la funcion 'Huffman_transform' y este retorna un
+    arreglo de nodos para ser comprimidos. Luego es enviado a 'Huffman_Compression'
+    que retorna el arbol binario con los datos comprimidos."""
     pass
