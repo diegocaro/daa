@@ -1,17 +1,28 @@
-from Heap import *
+from heapq import heappush, heappop
+import unittest
+
+# Class Node for Heap
+class Node:
+    def __init__(self, symbol = '', freq = 0):
+        self.symbol = symbol
+        self.freq = freq
+        self.right = None
+        self.left = None
+    def __lt__(self, other):
+        return self.freq < other.freq
 
 def Huffman_compression(nodes):
     n = len(nodes)
-    heap = Heap()
+    heap = []
     for node in nodes:
-        heap.push(node)
-    for i in range(1, n):
+        heappush(heap,node)
+    for _ in range(1, n):
         z = Node()
-        z.left = heap.pop()
-        z.right = heap.pop()
+        z.left = heappop(heap)
+        z.right = heappop(heap)
         z.freq = z.left.freq + z.right.freq
-        heap.push(z)
-    return heap.root[1]
+        heappush(heap, z)
+    return heap[0]
 
 def Huffman_transform(data):
     n = len(data)
@@ -37,20 +48,33 @@ def Huffman(array):
     array = Huffman_transform(array)
     return Huffman_compression(array)
 
+class TestHuffman(unittest.TestCase):
+    def test(self):
+        a = [1, 0, 0, 1, 1, 0, -1, -2, -3, -3, -4, -4, -4, -4, -3]
+        b =Huffman(a)
+        inorder(b)
+        #a way to check if nodes are good
+
 def inorder(node):
     if node == None:
         return
     inorder(node.left)
-    if node.symbol != '':
-        print(node.symbol, node.freq)
+    # if node.symbol != '':
+    print(node.symbol, node.freq)
     inorder(node.right)
 
 if __name__ == '__main__':
-    from sys import argv
+    from sys import argv, exit
+
+    if len(argv) == 1:
+        unittest.main()
+        exit()
+
     filename = argv[1]
 
     A = [] # creates an empty array
     with open(filename, 'r') as f:
         for line in f:
             A.append(int(line))
+    print(A)
     inorder(Huffman(A))
