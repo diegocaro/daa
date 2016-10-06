@@ -41,7 +41,8 @@ def inorder(node):
     if node == None:
         return
     inorder(node.left)
-    print(node.symbol, node.freq)
+    if node.symbol != '':
+        print(node.symbol, node.freq)
     inorder(node.right)
 
 if __name__ == '__main__':
