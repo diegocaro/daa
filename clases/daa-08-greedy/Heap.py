@@ -1,8 +1,8 @@
-# Heap implementation, can be work adapted to any type.
+# Heap implementation, can be adapted to any type with some work...
 
 # Class Node for Heap
 class Node:
-    def __init__(self, symbol, freq):
+    def __init__(self, symbol = '', freq = 0):
         self.symbol = symbol
         self.freq = freq
         self.right = None
