@@ -1,7 +1,8 @@
 import unittest
+from random import shuffle
 
 def sort(A, lo, hi):
-  if hi <= lo:
+  if lo >= hi:
     return
   j = partition(A, lo, hi)
   sort(A, lo, j-1)
@@ -13,17 +14,19 @@ def partition(A, lo, hi):
   v = A[lo]
   while True:
     while A[i] < v:
-      if i == hi: break
       i = i+1
+      if i == hi: break
     while A[j] > v:
-      if j == lo: break
       j = j - 1
+      if j == lo: break
+    
     if i >= j: break
     A[i], A[j] = A[j], A[i]
-  A[j], A[lo] = A[lo], A[j]
+  A[lo], A[j] = A[j], A[lo]
   return j
 
 def quicksort(A):
+  shuffle(A)
   sort(A, 0, len(A)-1)
 
 class TestQuickSort(unittest.TestCase):
@@ -56,7 +59,11 @@ if __name__=='__main__':
     for line in f:
       A.append(int(line))
   
-  samples = 10
+  # Growing recursion limit (stack space)
+  import sys
+  sys.setrecursionlimit(max(sys.getrecursionlimit(), len(A) + 100000))
+  
+  samples = 1
   t = Timer("quicksort(A)", "from __main__ import quicksort, A")
   took = t.timeit(samples) / samples 
   print( "quicksort for {} integers took {:.4f} secs".format(len(A), took))
