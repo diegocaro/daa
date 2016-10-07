@@ -1,3 +1,6 @@
+# Huffman implemenation by Manuel Tobar
+# Semestre 2016-2
+
 from heapq import heappush, heappop
 import unittest
 
