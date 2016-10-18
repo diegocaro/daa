@@ -36,23 +36,33 @@ def tarjetas(A):
     C.extend(B2)
   return C
 
-def answer(A):
+def answer(A, pr=False):
   ans = tarjetas(A)
-  return  len(ans) < len(A)//2
+  if pr: print(ans)
+  return  len(ans) <= len(A)//2
 
 if __name__=='__main__':
-  t = list("abbbcbad")
+  t = list("abababbb")
+  print(answer(t,True))
+  print("calls:", calls, " theory worst case:", int(len(t) * log(len(t),2)))
+  
+  t = list("abababbb"*1000)
   print(answer(t))
   print("calls:", calls, " theory worst case:", int(len(t) * log(len(t),2)))
   
-  t = list("abbbcbad"*1000)
+  
+  t = list("abababab")
+  print(answer(t,True))
+  print("calls:", calls, " theory worst case:", int(len(t) * log(len(t),2)))
+  
+  t = list("abababab"*1000)
   print(answer(t))
   print("calls:", calls, " theory worst case:", int(len(t) * log(len(t),2)))
   
   
   calls = 0
   t = list("abcdefgh")
-  print(answer(t))
+  print(answer(t, True))
   print("calls:", calls, " theory worst case:", int(len(t) * log(len(t),2)))
   
   calls = 0
