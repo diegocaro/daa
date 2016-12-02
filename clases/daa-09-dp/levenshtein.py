@@ -1,3 +1,4 @@
+import unittest
 def levenshtein(s1, s2):
     p1 = len(s1)
     p2 = len(s2)
@@ -49,37 +50,20 @@ def edit_distance(s1, s2, memory_space_efficent = True):
         return Space_Efficient_Alignmen(s1, s2)
     return levenshtein(s1, s2)
 
-def test(flag):
-    palabras = [("casa", "cala"), ("levenshtein", "meilenstein"), ("facil","dificil"),
-                ("sonny","snowy"), ("",""), ("a", "a"), ("a", "")]
-    resultados = [1,4,3,3,0,0,1]
-    for i in range (len(palabras)):
-        if flag:
-            a = edit_distance(palabras[i][0], palabras[i][1])
-            if ( a != resultados[i]):
-                print("error, resultado esperado: {} \n resultado obtenido: {} ".format(resultados[i], a) )
-                return 1
-            # else:
-            #     print("Test {} pasado.".format(i+1))
-        else:
-            b = edit_distance(palabras[i][0], palabras[i][1], False)
-            if ( b != resultados[i]):
-                print("error, resultado esperado: {} \n resultado obtenido: {} ".format(resultados[i], b) )
-                return 1
-            # else:
-            #     print("Test {} pasado.".format(i+1))
-    return 0
 
-if __name__ == '__main__':
-    from timeit import Timer
-    from sys import argv, exit
-    samples = 100
-    A = True
-    t = Timer("test(A)", "from __main__ import test, A")
-    took = t.timeit(samples) / samples
-    print( "test for {} took {:.8f} secs".format(A, took))
-    A = False
-    samples = 100
-    t = Timer("test(A)", "from __main__ import test, A")
-    took = t.timeit(samples) / samples
-    print( "test for {} took {:.8f} secs".format(A, took))
+class Test_edit_distance(unittest.TestCase):
+	def test(self):
+		palabras = [("casa", "cala"), ("levenshtein", "meilenstein"), ("facil","dificil"),
+                ("sonny","snowy"), ("",""), ("a", "a"), ("a", "")]
+		resultados = [1,4,3,3,0,0,1]
+		for i in range (len(palabras)):
+			a = edit_distance(palabras[i][0], palabras[i][1])
+			b = edit_distance(palabras[i][0], palabras[i][1], False)
+			if (a != resultados[i] or  b != resultados[i] ):
+				self.fail( "edit distance failed." )
+
+if __name__=='__main__':
+	from sys import argv, exit
+	if len(argv) == 1:
+		unittest.main()
+		exit()
